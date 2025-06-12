@@ -1,15 +1,20 @@
+// src/App.js
 import React, { useState } from 'react';
 import ReviewInput from './components/ReviewInput';
-import FakeReviewDetector from './components/FakeReviewDetector';
+import ReviewList from './components/ReviewList';
 
 function App() {
-  const [submittedReview, setSubmittedReview] = useState('');
+  const [reviews, setReviews] = useState([]);
+
+  const handleDetect = (newReview) => {
+    setReviews([...reviews, newReview]);
+  };
 
   return (
     <div className="App">
-      <h1>AI Fake Review Detector</h1>
-      <ReviewInput onSubmit={setSubmittedReview} />
-      <FakeReviewDetector reviewText={submittedReview} />
+      <h1>Fake Product Review Detector</h1>
+      <ReviewInput onDetect={handleDetect} />
+      <ReviewList reviews={reviews} />
     </div>
   );
 }
